@@ -23,7 +23,6 @@ app.get('/', function(req, response) {
   file.on("finished", function(){
     response.end();
   });
-
 });
 
 app.get(/(un)?zombify/, function(request, response) {
@@ -64,13 +63,14 @@ app.use(function(req, res) {
 });
 
 function errorResponse(response, code, message) {
-  response.writeHead(code);
-  response.json(
-    {
-      status: code,
-      'message': message
-    }
-  );
+  response
+    .status(code)
+    .json(
+      {
+        status: code,
+        'message': message
+      }
+    );
 }
 
 var server = app.listen(7000, function () {
